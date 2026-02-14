@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+body, html { height: 100%; }
+
+.split-screen {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+/* --- Left Panel (Form) --- */
+.left-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    padding: 2rem;
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: 400px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #0F172A;
+    margin-bottom: 2rem;
+}
+
+.logo-icon { color: #007BFF; margin-right: 10px; font-size: 1.5rem; }
+
+h1 { font-size: 2rem; color: #0F172A; margin-bottom: 0.5rem; line-height: 1.2; }
+.subtitle { color: #64748B; margin-bottom: 2rem; font-size: 0.95rem; }
+
+/* Inputs with Icons */
+.input-container {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.input-container .icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94A3B8;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 12px 12px 12px 45px; /* Space for icon */
+    border: 1px solid #E2E8F0;
+    border-radius: 50px; /* Fully rounded corners */
+    font-size: 0.95rem;
+    outline: none;
+    transition: 0.3s;
+    background: #F8FAFC;
+}
+
+.input-container input:focus {
+    border-color: #007BFF;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-options {
+    text-align: right;
+    margin-bottom: 1.5rem;
+}
+.forgot-pass { color: #007BFF; font-size: 0.85rem; text-decoration: none; }
+
+/* Gradient Button */
+.cta-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #0066FF 0%, #00C6FF 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+    transition: transform 0.2s;
+}
+
+.cta-btn:hover { transform: scale(1.02); }
+
+/* Divider */
+.divider {
+    text-align: center;
+    margin: 1.5rem 0;
+    position: relative;
+}
+.divider span {
+    background: white;
+    padding: 0 10px;
+    color: #94A3B8;
+    font-size: 0.85rem;
+    position: relative;
+    z-index: 1;
+}
+.divider::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    width: 100%;
+    height: 1px;
+    background: #E2E8F0;
+    z-index: 0;
+}
+
+/* Social Buttons */
+.social-login { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
+.social-btn {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    border: 1px solid #E2E8F0;
+    background: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #333;
+    transition: 0.3s;
+}
+.social-btn:hover { background: #F1F5F9; }
+
+.switch-auth { text-align: center; font-size: 0.9rem; color: #64748B; }
+.switch-auth a { color: #007BFF; text-decoration: none; font-weight: 600; }
+
+.message { text-align: center; margin-top: 10px; font-size: 0.9rem; min-height: 20px;}
+.message.error { color: #ef4444; }
+.message.success { color: #10b981; }
+
+/* --- Right Panel (Image) --- */
+.right-panel {
+    flex: 1;
+    background: url('side-bg.jpg') no-repeat center center/cover;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 3rem;
+}
+
+/* Dark overlay gradient for readability if needed */
+.right-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.8), transparent);
+}
+
+.overlay-text {
+    position: relative;
+    color: white;
+    z-index: 2;
+}
+
+.overlay-text h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+.overlay-text p { font-size: 1.1rem; opacity: 0.9; }
+
+/* Mobile */
+@media (max-width: 768px) {
+    .split-screen { flex-direction: column; }
+    .right-panel { display: none; } /* Hide image on mobile */
+    .left-panel { padding: 1.5rem; }
+}
