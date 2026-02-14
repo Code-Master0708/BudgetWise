@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - BudgetWise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Specific styles for Reports Table */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        th { background-color: #f8fafc; color: #64748b; font-weight: 600; }
+        .status-positive { color: #10b981; }
+        .status-negative { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand"><i class="fa-solid fa-brain"></i> <span>BudgetWise</span></div>
+            <nav>
+                <a href="/dashboard"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+                <a href="#" class="active"><i class="fa-solid fa-chart-pie"></i> Reports</a>
+                <a href="/logout" style="margin-top: auto; color: #EF4444;"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h1>Financial Reports</h1>
+            </header>
+
+            <div class="dashboard-grid" style="margin-bottom: 30px;">
+                <div class="card">
+                    <h3>Total Budget</h3>
+                    <h2 id="reportBudget">₹0.00</h2>
+                </div>
+                <div class="card">
+                    <h3>Total Spent</h3>
+                    <h2 id="reportSpent" style="color: #ef4444;">₹0.00</h2>
+                </div>
+                <div class="card">
+                    <h3>Remaining</h3>
+                    <h2 id="reportRemaining" style="color: #10b981;">₹0.00</h2>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Expense History</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reportTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Simple Script to load Report Data
+        document.addEventListener('DOMContentLoaded', async () => {
+            const res = await fetch('/api/expenses'); // Fetches all data
+            const data = await res.json();
+
+            // Update Cards
+            document.getElementById('reportBudget').textContent = `₹${data.budget}`;
+            document.getElementById('reportSpent').textContent = `₹${data.total_spend}`;
+            document.getElementById('reportRemaining').textContent = `₹${data.remaining}`;
+
+            // Update Table
+            const tbody = document.getElementById('reportTableBody');
+            tbody.innerHTML = '';
+            data.expenses.forEach(exp => {
+                const row = `
+                    <tr>
+                        <td>${exp.date}</td>
+                        <td>${exp.category}</td>
+                        <td>${exp.description}</td>
+                        <td class="status-negative">- ₹${exp.amount}</td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        });
+    </script>
+</body>
+</html>

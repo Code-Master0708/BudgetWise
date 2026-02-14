@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - BudgetWise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="split-screen">
+        <div class="left-panel">
+            <div class="content-wrapper">
+                <div class="brand">
+                    <i class="fa-solid fa-chart-line logo-icon"></i> 
+                    <span>BudgetWise</span>
+                </div>
+                
+                <h1>Create Account</h1>
+                <p class="subtitle">Start your journey to financial freedom.</p>
+
+                <form id="authForm">
+                    <div class="input-container">
+                        <i class="fa-regular fa-user icon"></i>
+                        <input type="text" id="username" placeholder="Username" required>
+                    </div>
+
+                    <div class="input-container">
+                        <i class="fa-regular fa-envelope icon"></i>
+                        <input type="email" id="email" placeholder="Email Address" required>
+                    </div>
+                    
+                    <div class="input-container">
+                        <i class="fa-solid fa-lock icon"></i>
+                        <input type="password" id="password" placeholder="Password" required>
+                    </div>
+
+                    <button type="submit" class="cta-btn">Sign Up</button>
+                    <div id="msg" class="message"></div>
+
+                    <div class="divider">
+                        <span>Or continue with</span>
+                    </div>
+
+                    <div class="social-login">
+                        <button type="button" class="social-btn"><i class="fa-brands fa-google"></i></button>
+                        <button type="button" class="social-btn"><i class="fa-brands fa-apple"></i></button>
+                    </div>
+
+                    <p class="switch-auth">Already have an account? <a href="/login">Log In</a></p>
+                </form>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="overlay-text">
+                <h2>Join the Revolution.</h2>
+                <p>Smart budgeting is just one click away.</p>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Specific logic for Register
+        document.getElementById('authForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            handleAuth('/api/register', {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            }, true); // true = redirect to login after success
+        });
+    </script>
+</body>
+</html>
